@@ -53,7 +53,7 @@
             font-size: 14px;
             color: rgb(106, 106, 106)
         }
-        .box>p:last-child{
+        .box>h5{
             margin-top: 8px;
         } 
     </style>
@@ -78,6 +78,7 @@
                     <option value="default">Default</option>
                     <option value="ascending">Ascending</option>
                     <option value="descending">Descending</option>
+                    <option value="sort by popularity">Sort by popularity</option>
                 </select>
             </div>
         </div>
@@ -348,7 +349,7 @@
                     </div>
                     <h4>${product.title}</h4>
                     <p>${product.description}</p>
-                    <p>$ ${product.price}</p>
+                    <h5>$ ${product.price}</h5>
                 </div>`;
     }
 
@@ -379,6 +380,10 @@
         }
         else if (selectedSorting=="descending"){
             products.sort((a,b)=>b.price-a.price)
+            displayProduct(products)
+        }
+        else if (selectedSorting=="sort by popularity"){
+            products.sort((a,b)=>b.rating.rate-a.rating.rate)
             displayProduct(products)
         }
     }

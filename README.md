@@ -20,12 +20,16 @@ JavaScript
 ### createProductCard: 
 Generates HTML structure for a single product card.
 ### displayProducts: 
+![Product Page](./images/whole_product_list.JPG)
 Appends product cards to the DOM.
 ### filterProducts: 
+![filter by electronics](./images/sortByElectronics.JPG)
 Filters products based on the selected category.
 ### sortProductsByPrice: 
 Sorts products by price.
+![sort by price](./images/sortbyprice.JPG)
 ### sortProductsByPopularity: 
+![sort by popularity](./images/sortbypopularity.JPG)
 Sorts products by rating.
 
 ### Responsive Design

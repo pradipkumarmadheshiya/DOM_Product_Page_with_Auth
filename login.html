@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SignUp Page</title>
+    <title>Login Page</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -70,17 +70,17 @@
             background-color: #0056b3;
         }
 
-        #already_login{
+        #create_user{
             margin-top: 10px;
         }
 
-        #already_login p {
+        #create_user p {
             color: #666;
             font-size: 14px;
             margin: 0;
         }
 
-        #already_login a {
+        #create_user a {
             color: #007bff;
             text-decoration: none;
             font-weight: bold;
@@ -88,7 +88,7 @@
             transition: color 0.3s ease;
         }
 
-        #already_login a:hover {
+        #create_user a:hover {
             color: #0056b3;
         }
 
@@ -96,8 +96,8 @@
 </head>
 <body>
     <div class="container">
-        <h2>SignUp Page</h2>
-        <div id="signup">
+        <h2>Login Page</h2>
+        <div id="login">
             <form id="form">
                 <label>Email:</label> 
                 <input type="email" id="email">
@@ -106,45 +106,38 @@
                 <input type="submit" id="submit" value="Submit">
             </form>
         </div>
-        <div id="already_login">
+        <div id="create_user">
             <div>
-                <p>Already SignedUp</p>
-                <a href="login.html">Login</a>
+                <p>Create new user</p>
+                <a href="index.html">SignUp</a>
             </div>
         </div>
     </div>
 </body>
 <script>
     const form=document.getElementById("form")
-    let email=document.getElementById("email")
-    let password=document.getElementById("password")
+    const email=document.getElementById("email")
+    const password=document.getElementById("password")
 
-    const signup= (event)=>{
-        event.preventDefault()
-        
-        email=email.value.trim()
-        password=password.value.trim()
-
-        if (!email || !password){
-            alert("Please fill all fields!")
-            location.reload()
-            return
-        }
+    const login= (event)=>{
+        event.preventDefault()        
 
         const userDetails={
-            "email":email,
-            "password":password
+            "email":email.value,
+            "password":password.value
         }
-
         const savedDetail=JSON.parse(localStorage.getItem("userDetails")) || {}
+        
         if (savedDetail.email==userDetails.email && savedDetail.password==userDetails.password){
-            alert("Already SignedUp. Please Login!")
+            localStorage.setItem("isAuth", "Authenticated")
+            window.location.href="home.html"
         }
-        localStorage.setItem("userDetails", JSON.stringify(userDetails))
-        window.location.href="login.html"
+        else{
+            alert("Invalid Credentials!")
+        }
     }
 
-    form.addEventListener("submit", signup)
+    form.addEventListener("submit", login)
 
 </script>
 </html>

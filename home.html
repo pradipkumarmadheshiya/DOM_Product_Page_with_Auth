@@ -78,6 +78,11 @@
         .cart{
             margin-top: 10px;
         }
+        #logout{
+            position: absolute;
+            right: 30px;
+            top: 40px;
+        }
     </style>
 </head>
 <body>
@@ -89,7 +94,7 @@
         </nav>
         <div class="filter-sort">
             <div class="filter">
-                <label for="">Filter by category:</label>
+                <label>Filter by category:</label>
                 <select id="category" onclick="filterProduct()">
                     <option value="">All</option>
                     <option value="men's clothing">Mens's clothing</option>
@@ -99,7 +104,7 @@
                 </select>
             </div>
             <div class="sort">
-                <label for="">Sort by price:</label>
+                <label>Sort by price:</label>
                 <select id="sort" onclick="sortProduct()">
                     <option value="">Default</option>
                     <option value="ascending">Ascending</option>
@@ -112,6 +117,7 @@
         <div class="boxes">
             
         </div>
+        <button id="logout">Logout</button>
     </div>
 </body>
 </html>
@@ -365,6 +371,7 @@
     const boxes=document.querySelector(".boxes");
     const categoryFilter=document.getElementById("category");
     const priceSorting=document.getElementById("sort")
+    const logout=document.getElementById("logout")
 
     const isAuth=localStorage.getItem("isAuth") || "NotAuthenticated"
     if (isAuth==="NotAuthenticated"){
@@ -373,20 +380,20 @@
     
     function createCard(product){
         return `<div class="box">
-                    <div class="imageBox">
-                        <img src="${product.image}" alt="">
-                    </div>
-                    <div class="rating">
-                        <p>${product.rating.rate}<i class="fa-solid fa-star"></i></p>
-                        <p>|</p>
-                        <p>${product.rating.count}</p>
-                    </div>
-                    <h4>${product.title}</h4>
-                    <h5>$ ${product.price}</h5>
-                    <input type="submit" class="cart" value="Add to Cart">
-                </div>`;
+                <div class="imageBox">
+                    <img src="${product.image}" alt="">
+                </div>
+                <div class="rating">
+                    <p>${product.rating.rate}<i class="fa-solid fa-star"></i></p>
+                    <p>|</p>
+                    <p>${product.rating.count}</p>
+                </div>
+                <h4>${product.title}</h4>
+                <h5>$ ${product.price}</h5>
+                <input type="submit" class="cart" value="Add to Cart" onclick="addToCart(${product.id})">
+            </div>`;
     }
-
+    
     function displayProduct(products){
         boxes.innerHTML=products.map(createCard);
     };
@@ -423,4 +430,23 @@
     }
 
     displayProduct(products)
+
+    function addToCart(id){
+        let productsId=JSON.parse(localStorage.getItem("productsId")) || []
+        
+        if (productsId.includes(id)){
+            alert("This item has already taken")
+        }
+        else{
+            productsId.push(id)
+            localStorage.setItem("productsId", JSON.stringify(productsId))
+            alert("Item added in cart")
+        }
+        location.reload()
+    }
+
+    logout.addEventListener("click", ()=>{
+        localStorage.setItem("isAuth", "NotAuthenticated")
+        location.reload()
+    })
 </script>

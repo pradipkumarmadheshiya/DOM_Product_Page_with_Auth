@@ -339,8 +339,6 @@
     let productsId=JSON.parse(localStorage.getItem("productsId"))    
      
     const cartItem=products.filter((el)=> (productsId.includes(el.id)));  
-    console.log(cartItem);
-    
 
     function createCart(product){
         return `<div class="box">
@@ -370,5 +368,9 @@
         localStorage.setItem("productsId", JSON.stringify(productsId))
         location.reload()
     }
+
+    if (cartItem.length===0){
+        boxes.innerHTML=`<p>Your Cart is Empty!</p>`
+    }  
 </script>
 </html>

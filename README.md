@@ -42,9 +42,3 @@ CSS media queries ensure the product cards are displayed properly on different s
 
 # Conclusion
 This project demonstrates the use of JavaScript for DOM manipulation, creating dynamic web content, and implementing interactive features such as filtering and sorting. The modular and reusable code ensures maintainability and scalability for future enhancements.
-
-
-
-
-
-
